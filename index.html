@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,35 +11,44 @@
 
 <body>
     <div class="container">
-        <div class="jumbotron bg-info">
+        <div id="title" class="jumbotron bg-info">
             <h1 class="display-7 text-center text-white">New York Times Search</h1>
         </div>
 
-        <div class="card">
+        <div id="card-body" class="card">
             <div class="card-header font-weight-bolder ">Search Parameters</div>
-            <form class= "m-4">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Search Term:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                        else.</small> -->
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Number of Records to Retrive:</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Start Year (Optional):</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">End Year (Optional):</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-            </form>
 
+            <div class="card-body">
+                <form id="SearchBody" class="">
+                    <div id="Search-term" class="form-group">
+                        <label>Search Term:</label>
+                        <input type="text" class="form-control" id="Term-input">
+                    </div>
+
+                    <div id="record-Num" class="form-group">
+                        <label>Number of Records to Retrive:</label>
+                        <input type="number" class="form-control" id="record-Num-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Start Year (Optional):</label>
+                        <input type="text" class="form-control" id="start-year">
+                    </div>
+                    <div class="form-group">
+                        <label>End Year (Optional):</label>
+                        <input type="text" class="form-control" id="end-year">
+                    </div>
+
+                    <!-- search button -->
+                    <button id="searchBtn">Search</button>
+                    <button id="Clearbtn">Clear Results</button>
+                </form>
+            </div>
         </div>
 
+        <div class="card">
+            <div class="card-header font-weight-bolder ">Top Articles</div>
+            <div id="top-articles" class="card-body"></div>
+        </div>
 
     </div>
 
