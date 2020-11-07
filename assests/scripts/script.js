@@ -9,14 +9,62 @@ var getURL = (searchTerm, startYear='', endYear='') => {
     return url
 }
 
-$.get(getURL('election', 2000, 2000))
-.then(data => {
-    var data = data.response.docs
-    console.log(data[0]);
+var termInput = $('#Term-input')
+var countInput = $('#record-Num-input')
+var startYearInput = $('#start-year')
+var endYearInput = $('#end-year')
+var searchButton = $('#searchBtn')
+var clearButton = $('#Clearbtn')
+var topArticlesDiv = $('#top-articles')
 
-    // data.forEach(doc => {
-        
-    // })
+function search() {
+    topArticlesDiv.html('')
+
+    var term = termInput.val()
+    var count = parseInt(countInput.val())
+    var start = parseInt(startYearInput.val())
+    var end = parseInt(endYearInput.val())
+
+    $.get(getURL(term, start, end))
+    .then(data => {
+        var data = data.response.docs
+    
+        for (let i = 0; i < count; i++) {
+            let doc = data[i];
+
+            let headline = $('<a>')
+                .attr('href', doc.web_url)
+                .attr('target', '_blank')
+                .append($('<h2>')
+                    .text(doc.headline.main))
+
+            let dateArr = doc.pub_date.split('T')[0].split('-')
+            let dateStr = `${dateArr[1]}-${dateArr[2]}-${dateArr[0]}`
+            let date = $('<en>').text(dateStr)
+
+            let abstract = $('<p>').text(doc.abstract)
+
+            let article = $('<article>')
+                .addClass(['border', 'rounded', 'bg-light', 'mb-3', 'p-3'])
+                .append(headline, date, abstract)
+
+            topArticlesDiv.append(article)
+        }
+    })
+}
+
+searchButton.on('click', event => {
+    event.preventDefault()
+    search()
 })
 
-console.log()
+clearButton.on('click', event => {
+    event.preventDefault()
+    
+    topArticlesDiv.html('')
+    
+    termInput.val('')
+    countInput.val(5)
+    startYearInput.val('')
+    endYearInput.val('')
+})
