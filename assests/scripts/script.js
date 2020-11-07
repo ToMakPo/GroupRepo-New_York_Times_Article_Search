@@ -5,6 +5,7 @@ var getURL = (searchTerm, startYear='', endYear='') => {
         + `&q=${searchTerm}`
         + (startYear ? `&begin_date=${startYear}0101` : '')
         + (endYear ? `&end_date=${endYear}1231` : '')
+    console.log(url);
     return url
 }
 
@@ -19,7 +20,7 @@ var topArticlesDiv = $('#top-articles')
 function search() {
     topArticlesDiv.html('')
 
-    var term = countInput.val()
+    var term = termInput.val()
     var count = parseInt(countInput.val())
     var start = parseInt(startYearInput.val())
     var end = parseInt(endYearInput.val())
@@ -30,10 +31,12 @@ function search() {
     
         for (let i = 0; i < count; i++) {
             let doc = data[i];
-            console.log(doc);
 
-            let headline = $('<h2>').text(doc.headline.main)
-            let link = $('<a>').attr('href', doc.web_url).append(headline)
+            let headline = $('<a>')
+                .attr('href', doc.web_url)
+                .attr('target', '_blank')
+                .append($('<h2>')
+                    .text(doc.headline.main))
 
             let dateArr = doc.pub_date.split('T')[0].split('-')
             let dateStr = `${dateArr[1]}-${dateArr[2]}-${dateArr[0]}`
@@ -41,7 +44,9 @@ function search() {
 
             let abstract = $('<p>').text(doc.abstract)
 
-            let article = $('<article>').append(link, date, abstract)
+            let article = $('<article>')
+                .addClass(['border', 'rounded', 'bg-light', 'mb-3', 'p-3'])
+                .append(headline, date, abstract)
 
             topArticlesDiv.append(article)
         }
@@ -51,4 +56,15 @@ function search() {
 searchButton.on('click', event => {
     event.preventDefault()
     search()
+})
+
+clearButton.on('click', event => {
+    event.preventDefault()
+    
+    topArticlesDiv.html('')
+    
+    termInput.val('')
+    countInput.val(5)
+    startYearInput.val('')
+    endYearInput.val('')
 })
