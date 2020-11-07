@@ -19,7 +19,7 @@
             <div class="card-header font-weight-bolder ">Search Parameters</div>
 
             <div class="card-body">
-                <form id="SearchBody" class="">
+                <form id="SearchBody">
                     <div id="Search-term" class="form-group">
                         <label>Search Term:</label>
                         <input type="text" class="form-control" id="Term-input">
@@ -27,8 +27,14 @@
 
                     <div id="record-Num" class="form-group">
                         <label>Number of Records to Retrive:</label>
-                        <input type="number" class="form-control" id="record-Num-input">
+                        
+                        <select type="number" class="form-control" id="record-Num-input">
+                            <option id="show-1" value="1">1</option>
+                            <option id="show-5" value="5">5</option>
+                            <option id="show-10" value="10">10</option>
+                        </select>
                     </div>
+                    
                     <div class="form-group">
                         <label>Start Year (Optional):</label>
                         <input type="text" class="form-control" id="start-year">
