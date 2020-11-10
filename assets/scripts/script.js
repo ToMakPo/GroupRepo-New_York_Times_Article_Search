@@ -25,6 +25,14 @@ function search() {
     var start = parseInt(startYearInput.val())
     var end = parseInt(endYearInput.val())
 
+    if(isNaN(start)) {
+        start='';
+    }
+
+    if(isNaN(end)) {
+        end='';
+    }
+
     $.get(getURL(term, start, end))
     .then(data => {
         var data = data.response.docs
